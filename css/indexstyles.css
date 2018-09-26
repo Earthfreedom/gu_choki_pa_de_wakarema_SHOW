@@ -1,0 +1,203 @@
+/*it's show time!の処理*/
+
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+body{
+  background: rgb(152, 21, 36) url(http://www.cnclazerkesim.com.tr/wp-content/uploads/%E7%9C%9F%E7%B4%85%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8-%E3%82%AB%E3%83%BC%E3%83%86%E3%83%B3-STAGE-CURTAIN-VECTOR-%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E7%B4%A0%E6%9D%90-1024x688.jpg) center center no-repeat;
+}
+
+*:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    }
+  
+  html, body {
+    height: 100%;
+    }
+    body {
+      text-align: center;
+      background-color: hsla(230,40%,50%,1);
+      }
+    body:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 0;
+      height: 100%;
+      }
+  
+  h1 {
+    display: inline-block;
+    color: yellow;
+    font-family: 'Righteous', serif;
+    font-size: 12em; 
+    text-shadow: .03em .03em 0 hsla(230,40%,50%,1);
+    }
+
+    h1:after {
+      content: attr(data-shadow);
+      position: absolute;
+      top: .3em; left: .3em;
+      z-index: -1;
+      text-shadow: none;
+      background-image:
+        linear-gradient(
+          45deg,
+          transparent 45%,
+          hsla(48,20%,90%,1) 45%,
+          hsla(48,20%,90%,1) 55%,
+          transparent 0
+          );
+
+      background-size: .05em .05em;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    
+      animation: shad-anim 15s linear infinite;
+      }
+  
+  @keyframes shad-anim {
+    0% {background-position: 0 0}
+    0% {background-position: 100% -100%}
+    } 
+
+    
+/*カーテンの処理*/
+
+#wrap::before,#wrap::after{
+  position: fixed;
+  z-index: 1;
+  top: -15%;
+  display: block;
+  visibility: hidden;
+  width: 50%;
+  height: 130%;
+  content: '';
+  background-color: red;
+}
+#wrap::before{
+  left: 0;
+  animation : curtain_l 3s;
+　-webkit-animation : curtain_l 3s;
+}
+#wrap::after{
+  right: 0;
+  animation : curtain_r 3s;
+　-webkit-animation : curtain_r 3s;
+}
+
+@keyframes curtain_l{
+  0%{visibility: visible;}
+  20%{transform: rotate(0deg) translateX(0%); background-color: black;}
+  60%{transform: rotate(6deg) translateX(-50%);}
+  80%{opacity: 1;}
+  100%{transform: rotate(0deg) translateX(-100%); opacity:0; visibility: hidden;}
+}
+@-webkit-keyframes curtain_l{
+  0%{visibility: visible;}
+  20%{-webkit-transform: rotate(0deg) translateX(0%); background-color: #cc2b3e;}
+  60%{-webkit-transform: rotate(6deg) translateX(-50%);}
+  80%{opacity: 1;}
+  100%{-webkit-transform: rotate(0deg) translateX(-100%); opacity:0; visibility: hidden;}
+}
+@keyframes curtain_r{
+  0%{ visibility: visible;}
+  20%{transform: rotate(0deg) translateX(0%); background-color: black;}
+  60%{transform: rotate(-6deg) translateX(50%);}
+  80%{opacity: 1;}
+  100%{transform: rotate(0deg) translateX(100%); opacity:0; visibility: hidden;}
+}
+@-webkit-keyframes curtain_r{
+  0%{visibility: visible;}
+  20%{-webkit-transform: rotate(0deg) translateX(0%); background-color: #cc2b3e;}
+  60%{-webkit-transform: rotate(-6deg) translateX(50%);}
+  80%{opacity: 1;}
+  100%{-webkit-transform: rotate(0deg) translateX(100%); opacity:0; visibility: hidden;}
+}
+
+/*ローディング処理*/
+
+.loader {
+  color: #ffffff;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
