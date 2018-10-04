@@ -1,13 +1,22 @@
 <?php
-$array = $_POST['JSON_data'];
+header('Content-Type: application/json; charset=utf-8');
 
-$division = $_POST['group'];
-//   $array = [1,2,3,4,5,6,7,8,9,10];//仮の配列が10です。置き換えて使用して下さい
+$getdata = $_POST['JSON_data'];
+
+
+$array=json_decode($getdata); 
+
+$division=$_POST['group'];
+
+// parse_str($getgrnum,$division);
+
+
+//   $array = [1,2,3,4],[5,6,7,][8,9,10];//仮の配列が10です。置き換えて使用して下さい
  
 /* 配列を逆順に */
 var_dump( shuffle($array) );
 
-  $division=3; //仮数値が3です。置き換えて使用して下さい
+//   $division; //仮数値が3です。置き換えて使用して下さい
   
   function array_divide($array, $division) {
     $base_count = floor(count($array) / $division); // 部分配列1個あたりの要素数

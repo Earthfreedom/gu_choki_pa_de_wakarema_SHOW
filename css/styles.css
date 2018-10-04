@@ -4,6 +4,7 @@
 
 body{
   background: rgb(152, 21, 36) url(http://www.cnclazerkesim.com.tr/wp-content/uploads/%E7%9C%9F%E7%B4%85%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8-%E3%82%AB%E3%83%BC%E3%83%86%E3%83%B3-STAGE-CURTAIN-VECTOR-%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E7%B4%A0%E6%9D%90-1024x688.jpg) center center no-repeat;
+  justify-content: center;
 }
 
 *:before, *:after {
@@ -121,7 +122,13 @@ body{
   100%{-webkit-transform: rotate(0deg) translateX(100%); opacity:0; visibility: hidden;}
 }
 
-/*ローディング処理*/
+.username{
+  justify-content: center;
+  text-align:center;
+
+}
+
+/*くるくるローディング処理*/
 
 .loader {
   color: #ffffff;

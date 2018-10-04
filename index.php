@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/indexstyles.css">
+    <link rel="stylesheet" href="css/modaal.css">
     <title>わかれまSHOW！</title>
 </head>
 <body>
@@ -27,17 +28,29 @@
         <div class="button-box2" style="display:none">わかれまSHOW!<br>
         START</div>
 
-
-        
+        <div class="groupnuminput" style="display:none;font-size: 30px;font-weight: bold; color:#ffd700;" >
+            分けるグループ数を入れてね！
+            <input type="text" id="groupnum" style="font-size: 30px;border: solid 6px #ffd700;margin-right: 3px;">
+        </div>
+       
 
 
     </div>
 
 
 
-<div id="output" style="display: flex;;justify-content: center;"></div>
 
-<div id="qrcode"></div>
+
+ <div id="qrcodecontents"style="display:none">
+ <br>
+<div id="qrcode" style="padding:10px;"></div>
+<a id="qrurllink" href="" target="_blank">ユーザー側画面</a>
+
+
+<div id="output" style="display: flex; justify-content: center;"></div>
+<div id="user_name_num"></div>
+
+</div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Firebase App is always required and must be first -->
@@ -51,6 +64,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-functions.js"></script>
     <script src="js/jquery.qrcode.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/modaal.js"></script>
 
 </body>
 </html>

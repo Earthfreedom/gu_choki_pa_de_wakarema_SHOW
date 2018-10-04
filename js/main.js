@@ -22,27 +22,43 @@ $(function () {
     var RoomID_host = r;
     var qrurl = location.host + "/ikijanken/user.php?RoomID=" + RoomID_host;
     $('.button-box').click(function () {
+        document.getElementById("qrurllink").href = qrurl;
         $('#qrcode').qrcode({ width: 300, height: 300, text: qrurl });
         console.log(qrurl);
         $('.button-box').css('display', 'none');
         $('.button-box2').css('display', '');
+        $('#qrcodecontents').css('display', '');
+        $('.groupnuminput').css('display', '');
     });
 
     let index = 0;
     var array_length = [];
     var RoomID_user;
     var result_name = {};
+    var jsonresult
     // Firebase
     // Initialize Firebase
+    // var config = {
+    //     apiKey: "AIzaSyBpmpIO7D50IrdCuxtH_aX6rej94ywh78M",
+    //     authDomain: "chatapp-8b295.firebaseapp.com",
+    //     databaseURL: "https://chatapp-8b295.firebaseio.com",
+    //     projectId: "chatapp-8b295",
+    //     storageBucket: "chatapp-8b295.appspot.com",
+    //     messagingSenderId: "763401900420"
+    // };
+    // firebase.initializeApp(config);
+
+    // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyBpmpIO7D50IrdCuxtH_aX6rej94ywh78M",
-        authDomain: "chatapp-8b295.firebaseapp.com",
-        databaseURL: "https://chatapp-8b295.firebaseio.com",
-        projectId: "chatapp-8b295",
-        storageBucket: "chatapp-8b295.appspot.com",
-        messagingSenderId: "763401900420"
+        apiKey: "AIzaSyCDSgAdntx_VJZpLt7_VvYkGJUDyjp-iEI",
+        authDomain: "gu-choki-pa-de-wakarema-show.firebaseapp.com",
+        databaseURL: "https://gu-choki-pa-de-wakarema-show.firebaseio.com",
+        projectId: "gu-choki-pa-de-wakarema-show",
+        storageBucket: "",
+        messagingSenderId: "519303543239"
     };
     firebase.initializeApp(config);
+
 
     var newPostRef = firebase.database().ref();
 
@@ -69,158 +85,152 @@ $(function () {
         // result_name[index]["room_id"] = v.room_id;
         // result_name[index]["result"] = null;
 
+        if (RoomID_user === RoomID_host && v.user === true) {
+            result_name[index] = {
+                user_name: v.user_name,
+                user_id: v.user_id,
+                user: v.user,
+                room_id: v.room_id,
+                result: null
+            };
+
+            index++
+
+            // メッセージ表示
+            var str = "";
+
+            str += '<div id="' + k + '" class="a" >';
+            str += '<div class="b">';
+            str += '<div id="name" style="font-size: 16px;font-weight: bold; color:#ffd700;">' + v.user_name + "," + '</div>';
+            str += '</div>';
+            str += '<div class="c">';
+            str += '</div>';
+            str += '</div>';
 
 
-        result_name[index] = {
-            user_name: v.username,
-            user_id: v.user_id,
-            user: v.user,
-            room_id: v.room_id,
-            result: null
-        };
+            $('#output').append(str)
+            var result_name_length_inner = Object.keys(result_name).length
+            document.getElementById('user_name_num').innerHTML = '参加人数' + result_name_length_inner + '人';
+        }
 
-        index++
-
-
-
-
-
-        // メッセージ表示
-        var str = "";
-
-        str += '<div id="' + k + '" class="a" >';
-        str += '<div class="b">';
-        str += '<div id="name" style="font-size: 16px;font-weight: bold; color:#ffd700;">' + v.username + "," + '</div>';
-        str += '</div>';
-        str += '<div class="c">';
-        str += '</div>';
-        str += '</div>';
-
-
-        $('#output').append(str)
-
-        // } else {
-        //     return;
-        // }
-
-        // console.log(result_name);
-
-        // console.log(Object.keys(result_name))
 
     });
 
-    var group_num = 3;
+
+
+    // ここにindex.phpから取得したグループ数を設定する
+
+
     console.log(result_name);
-    setTimeout(() => {
+
+    $('.button-box2').click(function () {
+        var group_num = $("#groupnum").val();
+        // setTimeout(() => {
         var objnantoka = Object.keys(result_name)
         console.log(objnantoka)
         var JSON_data = JSON.stringify(objnantoka)
         console.log(JSON_data)
 
-        //Ajax通信開始
         $.ajax({
             url: 'rand.php',
             type: 'POST',
+            // data: { 'JSON_data': JSON_data },
+
+
             data: {
-                JSON_data: JSON_data,
-                group: group_num
+                'JSON_data': JSON_data,
+                'group': group_num
             },
-            contentType: 'application/json', // リクエストの Content-Type
-            dataType: "json"
 
-            // 2. doneは、通信に成功した時に実行される
-            //  引数のdata1は、通信で取得したデータ
-            //  引数のtextStatusは、通信結果のステータス
-            //  引数のjqXHRは、XMLHttpRequestオブジェクト
-        }).done(function (data1, textStatus, jqXHR) {
-            // $("#out1").html(jqXHR.status); //jqXHR.statusを表示
-            // $("#out2").html(textStatus); //textStatusを表示
 
-            // // 3. キーを指定して値を表示 
-            // $("#out4").html(data1["form"]["cs1"]);
-            console.log(textStatus)
-            // 4. オブジェクトをJSON形式の文字列に変換
-            var data2 = JSON.stringify(data1);
-            console.log(data2); //コンソールにJSON形式で表示される
+            // contentType: 'application/json', // リクエストの Content-Type
+            // dataType: "json"
 
-            // 5.JSON形式の文字列をオブジェクトにし、
-            // キーを指定して値(httpbin.org)を表示
-            var data3 = JSON.parse(data2);
-            // $("#out5").html(data3["headers"]["Host"]);
+        })
+            // Ajaxリクエストが成功した時発動
+            .done((data) => {
+                // $('.result').html(data);
+                console.log(data)
 
-            // 6. failは、通信に失敗した時に実行される
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            // $("#out1").html(jqXHR.status); //jqXHR.statusを表示
-            // $("#out2").html(textStatus); //textStatusを表示
-            // $("#out3").html(errorThrown); //errorThrownを表示
-            console.log(textStatus)
-            console.log(errorThrown)
-            // 7. alwaysは、成功/失敗に関わらず実行される
-        }).always(function () {
-            // $("#out6").html("complete"); //表示3
 
-        });
+                // .then(doc => {
+                //     console.log("then");
+                // })
+                // .catch(error => {
+                //     console.log('document add error!');
+                //     console.log(error);
+                // });
+
+            })
+            // Ajaxリクエストが失敗した時発動
+            .fail((data) => {
+                // $('.result').html(data);
+                console.log(data);
+            })
+            // Ajaxリクエストが成功・失敗どちらでも発動
+            .always((data) => {
+
+                var jsonajaxdata = data.responseText
+                var jsonslice = jsonajaxdata.slice(11)
+
+                jsonresult = JSON.parse(jsonslice)
 
 
 
+                console.log(jsonresult)
+                console.log(result_name)
+                var result_name_length = Object.keys(result_name).length;
+                console.log(result_name_length);
+                for (let index = 0; index < jsonresult.length; index++) {
+                    var element = jsonresult[index];
+                    console.log(element)
+                    for (let index2 = 0; index2 < element.length; index2++) {
+                        var element2 = element[index2];
+                        console.log(element2)
+                        var element3 = Number(element2)
+                        console.log(element3)
 
-    }, 3000);
+                        for (let index3 = 0; index3 < result_name_length; index3++) {
+                            if (element3 === index3) {
+                                console.log("処理")
+                                console.log(index)
+                                result_name[index3].result = index;
+                                result_name[index3].user = false;
+                                newPostRef.push({
+                                    user_name: result_name[index3].user_name,
+                                    user_id: result_name[index3].user_id,
+                                    user: result_name[index3].user,
+                                    result: result_name[index3].result,
+                                    room_id: result_name[index3].room_id
+                                })
+                            }
+                        }
+
+                    }
 
 
+                }
 
-
-
-
-
-    // Ajaxリクエストが成功・失敗どちらでも発動
-    // .always((data) => {
-
-    // });
-
-
-    // objexct.kyes
-
-    // }
-    //ユーザーネームを配列に追加
-
-
-
-    //ex: obj{1:{user_name:v.username,user_id:v.user_id,room_id:room_id,result:result}}
-
-
-    // 指定数でグループ分けをするために割り算（アマ映画ある場合はあまりを）計算する
-    // 例：人数11で３グループの場合
-
-    // 11/3=
-
-
-
-
-    // username[name: ear, name:]
-    // username[]
-
-    // 4[]
-    // 4[]
-    // 3[]
+                console.log(result_name)
+            });
+        // }, 3000);
 
 
 
-    //userのresult画像を出力する
-    function q() {
 
-        $("#result").html('<img src="rock.png" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
+        // setTimeout(() => {
 
-        if ("" == 1) {
-            $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
 
-        } else if ("" == 2) {
-            $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-        } else if ("" == 3) {
-            $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-        }
+        // }, 5000);
 
-    }
-    q()
+
+    })
+
+
+
+
+    // $('#qrcodecontents').modaal();
+
 
 
 });
