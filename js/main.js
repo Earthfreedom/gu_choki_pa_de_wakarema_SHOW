@@ -38,22 +38,11 @@ $(function () {
     var jsonresult
     // Firebase
     // Initialize Firebase
-    // var config = {
-    //     apiKey: "AIzaSyBpmpIO7D50IrdCuxtH_aX6rej94ywh78M",
-    //     authDomain: "chatapp-8b295.firebaseapp.com",
-    //     databaseURL: "https://chatapp-8b295.firebaseio.com",
-    //     projectId: "chatapp-8b295",
-    //     storageBucket: "chatapp-8b295.appspot.com",
-    //     messagingSenderId: "763401900420"
-    // };
-    // firebase.initializeApp(config);
-
-    // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyCDSgAdntx_VJZpLt7_VvYkGJUDyjp-iEI",
-        authDomain: "gu-choki-pa-de-wakarema-show.firebaseapp.com",
-        databaseURL: "https://gu-choki-pa-de-wakarema-show.firebaseio.com",
-        projectId: "gu-choki-pa-de-wakarema-show",
+        apiKey: "*********************************",
+        authDomain: ""*********************************",",
+        databaseURL: ""*********************************",",
+        projectId: ""*********************************",",
         storageBucket: "",
         messagingSenderId: "519303543239"
     };
