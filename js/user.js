@@ -6,48 +6,36 @@ $(function () {
     'use strict';
 
 
-    var user_id = "";
-    var room_id = $("#room_id").val();
+    let user_id = "";
+    let room_id = $("#room_id").val();
     // Firebase
-
-
     // Initialize Firebase
-    // var config = {
-    //     apiKey: "AIzaSyBpmpIO7D50IrdCuxtH_aX6rej94ywh78M",
-    //     authDomain: "chatapp-8b295.firebaseapp.com",
-    //     databaseURL: "https://chatapp-8b295.firebaseio.com",
-    //     projectId: "chatapp-8b295",
-    //     storageBucket: "chatapp-8b295.appspot.com",
-    //     messagingSenderId: "763401900420"
-    // };
-    // firebase.initializeApp(config);
-
-    // Initialize Firebase
-    var config = {
+    let firebaseConfig = {
         apiKey: "AIzaSyCDSgAdntx_VJZpLt7_VvYkGJUDyjp-iEI",
         authDomain: "gu-choki-pa-de-wakarema-show.firebaseapp.com",
         databaseURL: "https://gu-choki-pa-de-wakarema-show.firebaseio.com",
         projectId: "gu-choki-pa-de-wakarema-show",
-        storageBucket: "",
-        messagingSenderId: "519303543239"
+        storageBucket: "gu-choki-pa-de-wakarema-show.appspot.com",
+        messagingSenderId: "519303543239",
+        appId: "1:519303543239:web:9b8e50057e58c62d"
     };
-    firebase.initializeApp(config);
+    firebase.initializeApp(firebaseConfig);
 
 
-    var newPostRef = firebase.database().ref();
+    let newPostRef = firebase.database().ref();
 
     // 送信ボタンクリックでメッセージ送信
     // オブジェクトの形でデータを送ってください
     $('#send').on('click', function () {
         // 生成する文字列の長さ
-        var l = 8;
+        let l = 8;
 
         // 生成する文字列に含める文字セット
-        var c = "abcdefghijklmnopqrstuvwxyz0123456789";
+        let c = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-        var cl = c.length;
-        var r = "";
-        for (var i = 0; i < l; i++) {
+        let cl = c.length;
+        let r = "";
+        for (let i = 0; i < l; i++) {
             r += c[Math.floor(Math.random() * cl)];
         }
         user_id = r;
@@ -71,10 +59,8 @@ $(function () {
 
 
     newPostRef.on('child_added', function (data) {
-        var k = data.key;
-        var v = data.val();
-
-        console.log(k, v)
+        let k = data.key;
+        let v = data.val();
 
         if (v.user === false && v.room_id === room_id) {
 
@@ -97,42 +83,8 @@ $(function () {
                     $('.result_end').css('display', '');
                 }
             }
-            // alert("あなたは" + v.result + "グループです。")
         }
 
-
-
-
-
-
-        // メッセージ表示
-
     });
-
-
-
-
-    // //userのresult画像を出力する
-    // function q() {
-
-    //     $("#result").html('<img src="rock.png" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-
-    //     if ("" == 1) {
-    //         $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-
-    //     } else if ("" == 2) {
-    //         $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-    //     } else if ("" == 3) {
-    //         $("#result").html('<img src="image/01.png"" width="200" alt="" style="border-radius: 50%;border: solid 8px #ffd700;">')
-    //     }
-
-    // }
-    // q()
-
-
-
-
-
-
 
 });
